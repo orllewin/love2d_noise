@@ -9,7 +9,8 @@ A brown/pink/white noise generator written in Love2D/LÖVE.
 ![MacOS Screenshot](./readme_assets/macos_screenshot.png)
 
 * Download [love_noise.zip](https://github.com/orllewin/love2d_noise/blob/main/_macos_dist/love_noise.zip?raw=true) and decompress
-* On first run right-click the love_noise app icon and select `Open`, when the security popup appears click `Open`. This only needs to be done the first time.
+* On first run right-click the love_noise app icon and select `Open`, when the security popup appears click `Open`. This only needs to be done the first time
+* On MacOS Ventura you might need to repeat the above step before you get the `Open` option (because Apple are hostile to anything installed outside the App Store) 
 
 ## Install - All Platforms
 
