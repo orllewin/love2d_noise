@@ -1,10 +1,14 @@
+require 'globals'
 require "Coracle/object"
 require "Coracle/coracle"
 require "Coracle/love_config"
 require "Coracle/Views/view_manager"
 require "Coracle/Views/button"
 require "Coracle/Views/colour_button"
+require "Coracle/Views/toggle_button"
 require "Coracle/Views/slider"
+require "Coracle/Shapes/rectangle"
+require "Coracle/Shapes/line"
 require "Noise/noise"
 
 
@@ -15,7 +19,19 @@ local viewManager = ViewManager()
 local noise = Noise()
 local pitch = 0.8
 
-local title = "noise"
+local segmentColour = "#efefef"
+love.graphics.setColor(rgb(bg)) 
+local segmentedBackground = Rectangle('fill', 5, 70, 310, 40, 7, 'canvas')
+
+--320x115
+local line1 = Line(109, 80, 106, 100, div)
+local line2 = Line(212, 80, 212, 100, div)
+
+local brownButton = nil
+local pinkButton = nil
+local whiteButton = nil
+
+local title = "Noise"
 
 function play(type)
 	noise:setMode(type)
@@ -38,28 +54,41 @@ function love.load()
 	local buttonY = 75
 	local buttonMargin = (320 - (buttonWidth*3))/3
 	
-	local titleLabel = coracle.views.label(title, 10, 10)
+	local titleLabel = coracle.views.label(title, 10, 10, rgb("#444444"))
+	
 	
 	viewManager:add(titleLabel)
 	
 	love.graphics.setLineWidth(1)
 	
-	viewManager:add(ColourButton("brown", "#755e41", 10, buttonY, buttonWidth, buttonHeight, function() 
+	brownButton = ToggleButton("Brown", bg, brown,  10, buttonY, buttonWidth, buttonHeight, function() 
 		play("brown")
-		--love.graphics.setBackgroundColor(rgb("#5e493b"))
-		titleLabel:setText("noise: brown")
-	end))
-
-	viewManager:add(ColourButton("pink", "#8f597a", 	113, buttonY, buttonWidth, buttonHeight, function() 
+		line1:hide()
+		line2:show()
+		pinkButton:off()
+		whiteButton:off()
+	end)
+	
+	viewManager:add(brownButton)
+	
+	pinkButton = ToggleButton("Pink", bg, pink, 	113, buttonY, buttonWidth, buttonHeight, function() 
 		play("pink")
-		--love.graphics.setBackgroundColor(rgb("#5e384f"))
-		titleLabel:setText("noise: pink")
-	end))
-	viewManager:add(ColourButton("white", "#adadad", 216, buttonY, buttonWidth, buttonHeight, function() 
+		line1:hide()
+		line2:hide()
+		brownButton:off()
+		whiteButton:off()
+	end)
+
+	viewManager:add(pinkButton)
+	
+	whiteButton = ToggleButton("White", bg, whitee, 216, buttonY, buttonWidth, buttonHeight, function() 
 		play("white")
-		--love.graphics.setBackgroundColor(rgb("#454545"))
-		titleLabel:setText("noise: white")
-	end))
+		line1:show()
+		line2:hide()
+		brownButton:off()
+		pinkButton:off()
+	end)
+	viewManager:add(whiteButton)
 end	
 
 
@@ -70,8 +99,12 @@ end
 
 function love.draw()
 	
-	 
+	 segmentedBackground:draw()
+	
 	 viewManager:drawViews()
+	 
+	 line1:draw()
+	 line2:draw()
 end
 
 function love.mousepressed(x, y, button)

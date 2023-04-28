@@ -22,4 +22,16 @@ A brown/pink/white noise generator written in Love2D/LÖVE.
 * Install [LÖVE](https://love2d.org/) and [add to path](https://love2d.org/wiki/Getting_Started)
 * Clone the repo
 * Open in [Nova](https://nova.app/)
+* Create a custom run task: `open -n -a love ./`
 * Command-R to run (MacOS)
+
+## Distribute
+
+### .love
+
+Select the project files and compress as zip with main.lua at the root, change the file extension to .love
+
+### MacOS
+
+* Replace the love_noise.love in `_macos_dist/love_noise.app/Contents/Resources` with the new version.
+* Create news .icns file using [cloudconvert.com/png-to-icns](https://cloudconvert.com/png-to-icns)

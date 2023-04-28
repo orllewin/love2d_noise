@@ -30,6 +30,6 @@ function LoveConfig:default()
 	local font = love.graphics.getFont()
 	font:setFilter("linear", "linear", 4)
 	love.graphics.setColor(rgb("#ffffff"))
-	love.graphics.setBackgroundColor(rgb("#333333"))
+	love.graphics.setBackgroundColor(rgb("#fdfdfd"))
 end
 

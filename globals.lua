@@ -1,0 +1,5 @@
+bg = "#fefefe"
+div = "#dddddd"
+brown = "#eee5de"
+pink = "#ffcde0"
+whitee = "#eeeeee"

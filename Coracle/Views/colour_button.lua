@@ -30,10 +30,10 @@ local lineWidth = love.graphics.getLineWidth()
 	love.graphics.setCanvas(self.canvas)
 
 	love.graphics.setColor(rgb(self.colour)) 	
-	coracle.graphics.rectangle('line', self.canvasOffset, self.canvasOffset, width, height, 7, "canvas"):draw()
+	coracle.graphics.rectangle('fill', self.canvasOffset, self.canvasOffset, width, height, 7, "canvas"):draw()
 
 
-	love.graphics.setColor(white()) 
+	love.graphics.setColor(rgb("#4e4e4e")) 
 	local font = love.graphics.getFont()
 	local labelWidth = font:getWidth(label)
 	love.graphics.print(label, width/2 - (labelWidth/2) + self.canvasOffset, height/2 - (font:getHeight()/2) - 1 + self.canvasOffset)
