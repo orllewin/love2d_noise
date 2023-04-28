@@ -2,6 +2,8 @@ require "Coracle/mouse"
 
 class('ViewManager').extends()
 
+local isSliding = false
+
 function ViewManager:init()
 	ViewManager.super.init()
 	
@@ -25,6 +27,10 @@ function ViewManager:clickDown(x, y)
 			if view:contains(x, y) then
 				view:clickDown()
 				handled = true
+				
+				if view.slide ~= nil then
+					isSliding = true
+				end
 				break
 			end
 		end
@@ -33,13 +39,14 @@ function ViewManager:clickDown(x, y)
 end
 
 function ViewManager:mousemoved(x, y, dx, dy, istouch)
-	if self:hoverClickable(x, y) then
-		self.mouse:hoverClickable()
-		if self.hoverView ~= nil then
-			if self.hoverView.slide ~= nil then self.hoverView:slide(x, y) end
-		end
+	 if isSliding == true then
+		if self.hoverView.slide ~= nil then self.hoverView:slide(x, y) end
 	else
-		self.mouse:reset()
+		if self:hoverClickable(x, y) then
+			self.mouse:hoverClickable()
+		else
+			self.mouse:reset()
+		end
 	end
 end
 
@@ -59,6 +66,10 @@ end
 
 
 function ViewManager:clickUp(x, y)
+	if isSliding == true then
+		isSliding = false
+	end
+	
 	local handled = false
 	for i=1,#self.views do
 		local view = self.views[i]

@@ -20,11 +20,15 @@ function LoveConfig:setFont(font)
 end
 
 function LoveConfig:initFont(path, size)
-	love.graphics.setFont(love.graphics.newFont(path, size))
+	local font = love.graphics.newFont(path, size)
+	font:setFilter("linear", "linear", 4)
+	love.graphics.setFont(font)
 end
 
 function LoveConfig:default()
-	love.graphics.setNewFont(24)
+	love.graphics.setNewFont(12)
+	local font = love.graphics.getFont()
+	font:setFilter("linear", "linear", 4)
 	love.graphics.setColor(rgb("#ffffff"))
 	love.graphics.setBackgroundColor(rgb("#333333"))
 end
